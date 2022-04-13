@@ -20,7 +20,9 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="light" />
         <TouchableOpacity style={styles.touchable} onPress={onPress} />
-        <BottomSheet ref={ref} />
+        <BottomSheet ref={ref}>
+          <View style={{flex: 1, backgroundColor: '#777'}} />
+        </BottomSheet>
       </View>
     </GestureHandlerRootView>
   );
