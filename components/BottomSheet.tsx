@@ -12,14 +12,16 @@ import Animated, {
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 const MAX_TRANSLATE_Y = -SCREEN_HEIGHT + 50;
 
-type BottomSheetProps = {};
+type BottomSheetProps = {
+  children?: React.ReactNode;
+};
 export type BottomSheetRefProps = {
   scrollTo: (destination: number) => void;
   isActive: () => boolean;
 };
 
-const BottomSheet = React.forwardRef<BottomSheetProps, BottomSheetRefProps>(
-  ({}, ref) => {
+const BottomSheet = React.forwardRef<BottomSheetRefProps, BottomSheetProps>(
+  ({ children }, ref) => {
     const translationY = useSharedValue(0);
     const active = useSharedValue(false);
     const context = useSharedValue({ y: 0 });
@@ -74,6 +76,7 @@ const BottomSheet = React.forwardRef<BottomSheetProps, BottomSheetRefProps>(
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.bottomSheet, rBottomSheetStyle]}>
           <View style={styles.line} />
+          {children}
         </Animated.View>
       </GestureDetector>
     );
